@@ -59,15 +59,14 @@ def recipes_item():
 
 
 
-@bp.route('/recipes/details', methods=['GET'])
-def recipes_details():
+@bp.route('/recipes/details/<int:recipe_id>', methods=['GET'])
+def recipes_details(recipe_id):
     """Detail recipe view"""
-    if request.method == 'GET':
-        if RECIPE_ITEM in session:
-            json_object = session.get(RECIPE_ITEM)
-            json_string = json.dumps(json_object)
-            json_object = Json2Object(json_string)
-            recipe = Json2Object(json_object)
+    if RECIPE_ITEM in session:
+        json_object = session.get(RECIPE_ITEM)
+        json_string = json.dumps(json_object)
+        json_object = Json2Object(json_string)
+        recipe = Json2Object(json_object)
     else:
         abort(401)
 

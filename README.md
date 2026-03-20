@@ -25,7 +25,7 @@ This application has been created using the following components:
 >For this project I use Blueprint to organize the application.
 That was a bit challenging because by using Blueprint everything wont work properly without additional configuration.
 
-The rest of the components are available in the **requirements.txt**
+The rest of the components are available in the **pyproject.toml**
 
 ## Summary:
 
@@ -55,3 +55,57 @@ Users can save their favorite recipes if they are authenticated.
 
 The user will be able to see similar recipe in the favorites section
 This favorite section is only available for authenticated users.
+
+## Getting Started
+
+### Prerequisites
+- Python 3.11.1
+- [uv](https://docs.astral.sh/uv/) (package manager)
+- PostgreSQL
+
+### Installation
+
+1. Clone the repository and navigate to the project folder.
+
+2. Install dependencies with uv:
+    ```bash
+    uv sync
+    ```
+
+3. Create a `.env` file at the project root with the following variables:
+    ```
+    SECRET_KEY=your_secret_key
+    URL_SAFE_KEY=your_url_safe_key
+    DATABASE_URL=postgresql:///quick_recipe_db
+    API_KEY=your_tasty_api_key
+    MAIL_SMTP=smtp.sendgrid.net
+    MAIL_PORT=587
+    MAIL_USERNAME=apikey
+    MAIL_PASSWORD=your_sendgrid_api_key
+    MAIL_SENDER=your_sender_email
+    MAIL_SENDER_NAME=Quick Recipe
+    GOOGLE_CLIENT_ID=your_google_client_id
+    GOOGLE_CLIENT_SECRET=your_google_client_secret
+    GOOGLE_PROJECT_ID=your_google_project_id
+    GOOGLE_REDIRECT_URI_BASE=http://127.0.0.1:5000
+    ```
+
+### Running the app
+
+```bash
+uv run flask run
+```
+
+Or with gunicorn:
+
+```bash
+uv run gunicorn wsgi:app --bind 0.0.0.0:8000
+```
+
+### Managing dependencies
+
+| Task | Command |
+|------|---------|
+| Add a package | `uv add <package>` |
+| Remove a package | `uv remove <package>` |
+| Sync dependencies | `uv sync` |

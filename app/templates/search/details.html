@@ -90,7 +90,9 @@
                                 <p>
                                     <i class="fa fa-share-alt fa-1x"></i>&nbsp;&nbsp;<span style="font-weight: 700;">Share with:</span>
                                     <br>
-                                    {{ share.create(title='', sites='facebook,twitter,linkedin',mobile_sites='facebook,twitter,linkedin') }}
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-facebook btn-sm"><i class="fa fa-facebook"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-twitter btn-sm"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-linkedin btn-sm"><i class="fa fa-linkedin"></i></a>
                                     <br>
                                 </p>
                             </div>
@@ -100,7 +102,9 @@
                                     <p>
                                         <i class="fa fa-share-alt fa-1x"></i>&nbsp;&nbsp;<span style="font-weight: 700;">Share with:</span>
                                         <br>
-                                        {{ share.create(title='', sites='facebook,twitter,linkedin',mobile_sites='facebook,twitter,linkedin') }}
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-facebook btn-sm"><i class="fa fa-facebook"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-twitter btn-sm"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-linkedin btn-sm"><i class="fa fa-linkedin"></i></a>
                                         <br>
                                     </p>
                                 </a>

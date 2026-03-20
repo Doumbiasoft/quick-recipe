@@ -1,8 +1,6 @@
 from app.extensions import Flask, db,DebugToolbarExtension,Session,Object2Json,numpy,render_template,CURR_USER_KEY,session,g
 from config import Config
 from app.models.users import User
-from flask_share import Share
-
 def create_app(config=Config):
     app = Flask(__name__)
     app.config.from_object(config)
@@ -10,7 +8,6 @@ def create_app(config=Config):
     # Initialize the session extension
     Session(app)
     DebugToolbarExtension(app)
-    share = Share(app)
 
     """Initialize Flask extensions here"""
     db.init_app(app)

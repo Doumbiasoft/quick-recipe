@@ -11,7 +11,6 @@ dependencies = [
     "Flask-Bcrypt",
     "Flask-DebugToolbar",
     "Flask-Session",
-    "Flask-Share",
     "Flask-SQLAlchemy",
     "Flask-WTF",
     "google-auth",

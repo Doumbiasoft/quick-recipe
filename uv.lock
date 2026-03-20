@@ -372,18 +372,6 @@ wheels = [
 ]
 
 [[package]]
-name = "flask-share"
-version = "0.1.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flask" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/25/a4/44786a33e59ebea4ab07b90bba41d77bc2a6802967f8e8988f60805b0567/Flask-Share-0.1.1.tar.gz", hash = "sha256:7425e4dd20bf3b63ba3ec02b78502ff3166a23c469c8787cf1b21e402e0a098b", size = 39924, upload-time = "2018-05-17T06:49:54.74Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/dd/fc/8ea7d8afbf899957cbebae043a330763c3a12e595091fcb20fbe30775f86/Flask_Share-0.1.1-py2.py3-none-any.whl", hash = "sha256:e9673aafcde7c24a41ac831473a9fb2c6d159915e7335ca89cacac9114dd01f3", size = 49844, upload-time = "2018-05-17T06:49:52.789Z" },
-]
-
-[[package]]
 name = "flask-sqlalchemy"
 version = "3.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -790,7 +778,6 @@ dependencies = [
     { name = "flask-bcrypt" },
     { name = "flask-debugtoolbar" },
     { name = "flask-session" },
-    { name = "flask-share" },
     { name = "flask-sqlalchemy" },
     { name = "flask-wtf" },
     { name = "google-auth" },
@@ -819,7 +806,6 @@ requires-dist = [
     { name = "flask-bcrypt" },
     { name = "flask-debugtoolbar" },
     { name = "flask-session" },
-    { name = "flask-share" },
     { name = "flask-sqlalchemy" },
     { name = "flask-wtf" },
     { name = "google-auth" },

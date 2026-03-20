@@ -5,8 +5,14 @@ from app.forms.search.recipes import SearchForm
 
 url = f"{API_URL_BASE}/recipes/list"
 url_tags = f"{API_URL_BASE}/tags/list"
-data_tags = get_data(url_tags,headers=headers)
-tags = data_tags.results
+_tags = None
+
+def _get_tags():
+    global _tags
+    if _tags is None:
+        data = get_data(url_tags, headers=headers)
+        _tags = data.results
+    return _tags
 
 
 @bp.route('/recipes', methods=['GET','POST'])
@@ -77,7 +83,7 @@ def recipes_details(recipe_id):
 def get_type():
     seen = set()
     unique_list = []
-    for obj in tags:
+    for obj in _get_tags():
         if obj.type not in seen:
             unique_list.append({"id":f"{obj.type}","name":f"{obj.type.replace('_',' ')}"})
             seen.add(obj.type)
@@ -86,7 +92,7 @@ def get_type():
 def get_tag_by_type(type:str):
     seen = set()
     unique_list = []
-    for obj in tags:
+    for obj in _get_tags():
         if obj.type == type:
             if obj.name not in seen:
                unique_list.append({"id":f"{obj.name}","name":f"{obj.display_name.lower()}"})
@@ -96,7 +102,7 @@ def get_tag_by_type(type:str):
 def get_tag():
     seen = set()
     unique_list = []
-    for obj in tags:
+    for obj in _get_tags():
         if obj.name not in seen:
             unique_list.append({"id":f"{obj.name}","name":f"{obj.display_name.lower()}"})
             seen.add(obj.name)
@@ -106,7 +112,7 @@ def get_tag_tuple():
     seen = set()
     unique_list = []
     unique_list.append(("","-- Tags --"))
-    for obj in tags:
+    for obj in _get_tags():
         if obj.name not in seen:
             unique_list.append((f"{obj.name}",f"{obj.display_name.lower()}"))
             seen.add(obj.name)

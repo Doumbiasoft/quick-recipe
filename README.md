@@ -17,7 +17,7 @@
 
 ## Application components:
 This application has been created using the following components:
-- **Python3** (version 3.11.1)
+- **Python3** (version 3.13)
 - **Flask** as a framework
 - **Posgtres sql** as a Database
 
@@ -59,7 +59,7 @@ This favorite section is only available for authenticated users.
 ## Getting Started
 
 ### Prerequisites
-- Python 3.11.1
+- Python 3.13
 - [uv](https://docs.astral.sh/uv/) (package manager)
 - PostgreSQL
 

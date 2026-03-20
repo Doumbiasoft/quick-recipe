@@ -85,31 +85,22 @@
                                     <a href="#" data-toggle="modal" data-target="#alertModal" class="black-btn"><i class="fa fa-heart text-white"></i>&nbsp;&nbsp;Pin Recipe</a>
                                 {% endif %}
                             </div>
-                            {% if g.user %}
                             <div id="social_media">
                                 <p>
                                     <i class="fa fa-share-alt fa-1x"></i>&nbsp;&nbsp;<span style="font-weight: 700;">Share with:</span>
-                                    <br>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-facebook btn-sm"><i class="fa fa-facebook"></i></a>
-                                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-twitter btn-sm"><i class="fa fa-twitter"></i></a>
-                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-linkedin btn-sm"><i class="fa fa-linkedin"></i></a>
-                                    <br>
                                 </p>
+                                <div class="d-flex" style="gap: 8px;">
+                                    {% if g.user %}
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                                    {% else %}
+                                    <button type="button" class="btn btn-social-icon btn-facebook" data-toggle="modal" data-target="#alertModal"><i class="fa fa-facebook"></i></button>
+                                    <button type="button" class="btn btn-social-icon btn-twitter" data-toggle="modal" data-target="#alertModal"><i class="fa fa-twitter"></i></button>
+                                    <button type="button" class="btn btn-social-icon btn-linkedin" data-toggle="modal" data-target="#alertModal"><i class="fa fa-linkedin"></i></button>
+                                    {% endif %}
+                                </div>
                             </div>
-                            {% else %}
-                            <div>
-                                <a href="#" data-toggle="modal" data-target="#alertModal">
-                                    <p>
-                                        <i class="fa fa-share-alt fa-1x"></i>&nbsp;&nbsp;<span style="font-weight: 700;">Share with:</span>
-                                        <br>
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-facebook btn-sm"><i class="fa fa-facebook"></i></a>
-                                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-twitter btn-sm"><i class="fa fa-twitter"></i></a>
-                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social btn-linkedin btn-sm"><i class="fa fa-linkedin"></i></a>
-                                        <br>
-                                    </p>
-                                </a>
-                            </div>
-                            {% endif %}
                             <div class="list-item">
                                 <h5>Ingredients</h5>
                                 {%if recipe.sections  %}

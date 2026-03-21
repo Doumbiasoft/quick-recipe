@@ -104,15 +104,9 @@
                                     <i class="fa fa-share-alt fa-1x"></i>&nbsp;&nbsp;<span style="font-weight: 700;">Share with:</span>
                                 </p>
                                 <div class="d-flex" style="gap: 8px;">
-                                    {% if g.user %}
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
                                     <a href="https://twitter.com/intent/tweet?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
                                     <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
-                                    {% else %}
-                                    <button type="button" class="btn btn-social-icon btn-facebook" data-toggle="modal" data-target="#alertModal"><i class="fa fa-facebook"></i></button>
-                                    <button type="button" class="btn btn-social-icon btn-twitter" data-toggle="modal" data-target="#alertModal"><i class="fa fa-twitter"></i></button>
-                                    <button type="button" class="btn btn-social-icon btn-linkedin" data-toggle="modal" data-target="#alertModal"><i class="fa fa-linkedin"></i></button>
-                                    {% endif %}
                                 </div>
                             </div>
                             <div class="list-item">

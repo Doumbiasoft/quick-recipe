@@ -91,11 +91,10 @@
                         <div class="ingredient-list">
                             <div id="link_feature" class="recipe-btn text-center">
 
+                                <a style="cursor: pointer;" id="print-pdf" data-pdf-name="{{recipe.name}}"><i class="fa fa-print text-white"></i>&nbsp;&nbsp;Print Recipe</a>
                                 {% if g.user %}
-                                    <a  style="cursor: pointer;" id="print-pdf" data-pdf-name="{{recipe.name}}" class="printpdf"><i class="fa fa-print text-white"></i>&nbsp;&nbsp;Print Recipe</a>
                                     <a href="#" class="black-btn pin-recipe" data-obj="{{obj_to_json(recipe)}}"><i class="fa fa-heart {% if g.user.is_favorite(recipe.id) %} text-danger {% else %} text-white  {% endif %}"></i>&nbsp;&nbsp;{% if g.user.is_favorite(recipe.id) %}Unpin Recipe{% else %}Pin Recipe{% endif %}</a>
                                 {% else %}
-                                    <a href="#" data-toggle="modal" data-target="#alertModal"><i class="fa fa-print text-white"></i>&nbsp;&nbsp;Print Recipe</a>
                                     <a href="#" data-toggle="modal" data-target="#alertModal" class="black-btn"><i class="fa fa-heart text-white"></i>&nbsp;&nbsp;Pin Recipe</a>
                                 {% endif %}
                             </div>

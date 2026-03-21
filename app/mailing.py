@@ -1,6 +1,7 @@
 import smtplib
 import ssl
 import logging
+import threading
 from email.message import EmailMessage
 from config import Config
 
@@ -9,7 +10,16 @@ app_config=Config
 logger = logging.getLogger(__name__)
 
 
-def Send_Email(recipient:str,subject:str,message:str,content_type:str="html"):
+def Send_Email(recipient:str,subject:str,message:str,content_type:str="html",async_send:bool=True):
+    if async_send:
+        thread = threading.Thread(target=_send, args=(recipient, subject, message, content_type), daemon=True)
+        thread.start()
+        return
+
+    return _send(recipient, subject, message, content_type)
+
+
+def _send(recipient:str,subject:str,message:str,content_type:str="html"):
 
     msg = EmailMessage()
     msg['From'] = app_config.MAIL_DEFAULT_SENDER

@@ -59,7 +59,7 @@
                         <li id="link_home"><a href="{{ url_for('main.index') }}"><i class="fa fa-rss" style="font-size: large;"></i>&nbsp;Feed</a></li>
                         <li id="link_recipes"><a href="{{ url_for('search.recipes') }}"><i class="fa fa-list-alt" style="font-size: large;"></i>&nbsp;Recipes</a></li>
                         {% if not g.user %}
-                        <li id="link_auth"><a href="{{ url_for('auth.authentication') }}"><i class="fa fa-user" style="font-size: large;"></i>&nbsp;Log in - Sign up</a></li>
+                        <li id="link_auth"><a href="{{ url_for('auth.authentication') }}"><i class="fa fa-user" style="font-size: large;"></i>&nbsp;Sign In / Sign Up</a></li>
                         {% else %}
                         <li id="link_favorite_recipes"><a href="{{ url_for('main.recipes_favorites') }}"><i class="fa fa-heart" style="font-size: large;"></i>&nbsp;Favorites</a></li>
                         {% if g.user.is_admin %}

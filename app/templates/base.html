@@ -11,6 +11,30 @@
     <link rel="mask-icon" href="{{url_for('static',filename='images/safari-pinned-tab.svg')}}" color="#e59038">
     <meta name="msapplication-TileColor" content="#e59038">
     <meta name="theme-color" content="#ffffff">
+
+    <!-- App metadata -->
+    <meta name="description" content="Quick Recipe — Discover, search and save your favorite recipes. Filter by diet, cuisine and more.">
+    <meta name="keywords" content="recipes, cooking, food, quick recipe, vegetarian, desserts, gluten-free, meal ideas">
+    <meta name="author" content="Mouhamed Doumbia">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp, iMessage…) -->
+    <meta property="og:type"        content="website">
+    <meta property="og:site_name"   content="Quick Recipe">
+    <meta property="og:title"       content="Quick Recipe — Discover &amp; Save Amazing Recipes">
+    <meta property="og:description" content="Search thousands of recipes, filter by diet or cuisine, save your favorites and share them with friends.">
+    <meta property="og:image"       content="{{ request.host_url }}static/images/quick-recipe-github-illustration.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url"         content="{{ request.url }}">
+    <meta property="og:locale"      content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Quick Recipe — Discover &amp; Save Amazing Recipes">
+    <meta name="twitter:description" content="Search thousands of recipes, filter by diet or cuisine, save your favorites and share them with friends.">
+    <meta name="twitter:image"       content="{{ request.host_url }}static/images/quick-recipe-github-illustration.jpg">
+
      <!-- Google Font -->
      <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;display=swap" rel="stylesheet">
      <!-- Css Styles -->

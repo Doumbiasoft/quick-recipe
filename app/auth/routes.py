@@ -4,7 +4,7 @@ from app.forms.auth.login import LoginForm
 from app.forms.auth.register import RegisterForm
 from app.models.users import User
 from google_auth_oauthlib.flow import Flow
-from pip._vendor import cachecontrol
+import cachecontrol
 import google.auth.transport.requests
 from google.oauth2 import id_token
 import requests

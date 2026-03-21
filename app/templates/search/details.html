@@ -103,10 +103,15 @@
                                 <p>
                                     <i class="fa fa-share-alt fa-1x"></i>&nbsp;&nbsp;<span style="font-weight: 700;">Share with:</span>
                                 </p>
-                                <div class="d-flex" style="gap: 8px;">
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
-                                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
-                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                                <div class="d-flex flex-wrap" style="gap: 8px;">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-facebook" title="Share on Facebook"><i class="fa fa-facebook"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}&text={{ recipe.name }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-twitter" title="Share on Twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn"><i class="fa fa-linkedin"></i></a>
+                                    <a href="https://wa.me/?text={{ recipe.name }}%20{{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-whatsapp" title="Share on WhatsApp"><i class="fa fa-whatsapp"></i></a>
+                                    <a href="https://www.pinterest.com/pin/create/button/?url={{ request.url }}&media={{ recipe.thumbnail_url }}&description={{ recipe.name }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-pinterest" title="Share on Pinterest"><i class="fa fa-pinterest"></i></a>
+                                    <a href="https://www.reddit.com/submit?url={{ request.url }}&title={{ recipe.name }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-reddit" title="Share on Reddit"><i class="fa fa-reddit"></i></a>
+                                    <a href="mailto:?subject={{ recipe.name }}&body=Check out this recipe: {{ request.url }}" class="btn btn-social-icon btn-email" title="Share by Email"><i class="fa fa-envelope"></i></a>
+                                    <button type="button" id="copy-link-btn" class="btn btn-social-icon btn-copy-link" title="Copy link"><i class="fa fa-link"></i></button>
                                 </div>
                             </div>
                             <div class="list-item">
@@ -230,9 +235,15 @@
 {% endblock %}
 
 {% block scripts %}
-   <!--  $('#link_recipes').toggleClass('active'); -->
     $('#back').on('click', function(){
         history.back();
     });
-   
+
+    $('#copy-link-btn').on('click', function(){
+        navigator.clipboard.writeText(window.location.href).then(function(){
+            var $btn = $('#copy-link-btn');
+            $btn.html('<i class="fa fa-check"></i>');
+            setTimeout(function(){ $btn.html('<i class="fa fa-link"></i>'); }, 2000);
+        });
+    });
 {% endblock %}

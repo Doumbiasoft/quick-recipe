@@ -1061,3 +1061,78 @@
     color: #720e9e;
     background-color: #fff
 }
+
+.btn-whatsapp {
+    color: #fff;
+    background-color: #25d366;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-whatsapp:focus,.btn-whatsapp.focus {
+    color: #fff;
+    background-color: #1da851;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-whatsapp:hover {
+    color: #fff;
+    background-color: #1da851;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-whatsapp:active,.btn-whatsapp.active,.open>.dropdown-toggle.btn-whatsapp {
+    color: #fff;
+    background-color: #1da851;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-whatsapp .badge {
+    color: #25d366;
+    background-color: #fff
+}
+
+.btn-email {
+    color: #fff;
+    background-color: #555;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-email:focus,.btn-email.focus {
+    color: #fff;
+    background-color: #333;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-email:hover {
+    color: #fff;
+    background-color: #333;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-email:active,.btn-email.active,.open>.dropdown-toggle.btn-email {
+    color: #fff;
+    background-color: #333;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-email .badge {
+    color: #555;
+    background-color: #fff
+}
+
+.btn-copy-link {
+    color: #fff;
+    background-color: #e59038;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-copy-link:focus,.btn-copy-link.focus {
+    color: #fff;
+    background-color: #c97a28;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-copy-link:hover {
+    color: #fff;
+    background-color: #c97a28;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-copy-link:active,.btn-copy-link.active,.open>.dropdown-toggle.btn-copy-link {
+    color: #fff;
+    background-color: #c97a28;
+    border-color: rgba(0,0,0,0.2)
+}
+.btn-copy-link .badge {
+    color: #e59038;
+    background-color: #fff
+}

@@ -1,5 +1,5 @@
 from app.main import bp
-from app.extensions import API_URL_BASE,headers,get_data,render_template,randrange,sample,Json2Object,Object2Json,session,request,g,redirect,url_for,abort,CURR_USER_KEY,db,jsonify,json,convert_json,flash,Send_Email,os,APP_STATIC
+from app.extensions import API_URL_BASE,headers,get_data,render_template,randrange,sample,Json2Object,Object2Json,session,request,g,redirect,url_for,abort,CURR_USER_KEY,db,jsonify,json,convert_json,flash
 from app.models.recipe_favorites import RecipeFavorite
 from app.models.users import User
 
@@ -66,9 +66,9 @@ def get_subscribers():
 @bp.route('/recipes/pin', methods=["POST"])
 def add_pin():
     """Pin and unpin Recipe."""
+    if not g.user:
+        abort(401)
 
-
-    """Detail recipe view"""
     if request.method == 'POST':
 
         data = request.get_data()
@@ -158,4 +158,4 @@ def user_delete_account():
                   flash('Account deleted Successfully!','success')
                return (jsonify("success"), 201)
            else:
-               return (jsonify("failed"),300)
+               return (jsonify("failed"),400)

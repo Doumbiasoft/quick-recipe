@@ -38,10 +38,7 @@ def recipes():
 
 
             data_recipes_found = get_data(url,headers=headers,params=querystring)
-            if tag is not None or recipe is not None:
-                recipes_found = data_recipes_found.results
-            elif tag is None and recipe is None:
-                recipes_found = data_recipes_found.results
+            recipes_found = data_recipes_found.results
             return render_template('search/recipes.html',recipes_found=recipes_found,form=form)
 
     data_recipes_found = get_data(url,headers=headers,params=querystring)
@@ -79,34 +76,6 @@ def recipes_details(recipe_id):
     return render_template('search/details.html',recipe=recipe)
 
 
-
-def get_type():
-    seen = set()
-    unique_list = []
-    for obj in _get_tags():
-        if obj.type not in seen:
-            unique_list.append({"id":f"{obj.type}","name":f"{obj.type.replace('_',' ')}"})
-            seen.add(obj.type)
-    return unique_list
-
-def get_tag_by_type(type:str):
-    seen = set()
-    unique_list = []
-    for obj in _get_tags():
-        if obj.type == type:
-            if obj.name not in seen:
-               unique_list.append({"id":f"{obj.name}","name":f"{obj.display_name.lower()}"})
-               seen.add(obj.name)
-    return unique_list
-
-def get_tag():
-    seen = set()
-    unique_list = []
-    for obj in _get_tags():
-        if obj.name not in seen:
-            unique_list.append({"id":f"{obj.name}","name":f"{obj.display_name.lower()}"})
-            seen.add(obj.name)
-    return unique_list
 
 def get_tag_tuple():
     seen = set()

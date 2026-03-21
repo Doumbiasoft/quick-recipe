@@ -1,5 +1,8 @@
+import logging
 from app.extensions import render_template,redirect,flash,url_for,abort,request,g,session,db,jsonify,CURR_USER_KEY,os,APP_STATIC,EMAIL_RESET,Send_Email,URLSafeTimedSerializer,SignatureExpired,BadTimeSignature,google_client_config
 from app.auth import bp
+
+logger = logging.getLogger(__name__)
 from app.forms.auth.login import LoginForm
 from app.forms.auth.register import RegisterForm
 from app.models.users import User
@@ -108,7 +111,7 @@ def authentication():
 
         tab_two=""
         tab_selected_two="false"
-        tab_two=""
+        tab_show_two=""
 
         email = login_form.login_email.data
         password = login_form.login_password.data
@@ -229,10 +232,6 @@ def clear_session():
      if CURR_USER_KEY in session:
          del session[CURR_USER_KEY]
      session.clear()
-
-@bp.route('/auth/google/callback')
-def google_callback():
-    pass
 
 @bp.route('/email-reset-password', methods=['GET','POST'])
 def email_reset_password():
@@ -364,7 +363,8 @@ def send_email_activation(recipient_name,recipient_email):
             Send_Email(recipient_email,subject,msg,'html')
             flash('A notification has been sent to your e-mail address to activate your account. Please check your mailbox.!','success')
             return True
-    except:
+    except Exception as e:
+        logger.error(f"Failed to send activation email to {recipient_email}: {e}")
         flash('failed!','danger')
         return False
 
@@ -389,7 +389,8 @@ def send_email_reset_password(recipient_name,recipient_email):
             Send_Email(recipient_email,subject,msg,'html')
             flash('A notification has been sent to your e-mail address to reset your password. Please check your mailbox.!','success')
             return True
-    except:
+    except Exception as e:
+        logger.error(f"Failed to send password reset email to {recipient_email}: {e}")
         flash('failed!','danger')
         return False
 
@@ -411,6 +412,7 @@ def send_email_welcome(recipient_name,recipient_email):
 
             Send_Email(recipient_email,subject,msg,'html')
             return True
-    except:
+    except Exception as e:
+        logger.error(f"Failed to send welcome email to {recipient_email}: {e}")
         flash('failed!','danger')
         return False

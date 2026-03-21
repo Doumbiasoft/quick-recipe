@@ -25,12 +25,12 @@ def Send_Email(recipient:str,subject:str,message:str,content_type:str="html"):
             # Add SSL (layer of security)
             context = ssl.create_default_context()
             # Log in and send the email
-            with smtplib.SMTP_SSL(app_config.MAIL_SMTP, app_config.MAIL_PORT, context=context) as smtp:
+            with smtplib.SMTP_SSL(app_config.MAIL_SMTP, app_config.MAIL_PORT, context=context, timeout=10) as smtp:
                 smtp.login(app_config.MAIL_USERNAME, app_config.MAIL_PASSWORD)
                 data = smtp.sendmail(app_config.MAIL_USERNAME, recipient, msg.as_string())
 
         elif str(app_config.MAIL_PORT) == str(587):
-            with smtplib.SMTP(app_config.MAIL_SMTP, app_config.MAIL_PORT) as smtp:
+            with smtplib.SMTP(app_config.MAIL_SMTP, app_config.MAIL_PORT, timeout=10) as smtp:
                 smtp.starttls()
                 smtp.login(app_config.MAIL_USERNAME, app_config.MAIL_PASSWORD)
                 data = smtp.sendmail(app_config.MAIL_USERNAME, recipient, msg.as_string())

@@ -1,4 +1,5 @@
 venv/
+.venv/
 
 *.pyc
 __pycache__/
@@ -15,3 +16,12 @@ build/
 api_key.py
 admin_identifications.py
 google_client_secret.json
+
+# Flask session files
+flask_session/
+
+# Local API cache
+app/cache/
+
+# Environment variables
+.env

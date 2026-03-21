@@ -102,6 +102,15 @@ def authentication():
     login_form = LoginForm()
     register_form = RegisterForm()
 
+    # Detect which form was submitted and keep the correct tab active,
+    # even when WTForms validation fails before validate_on_submit() is reached.
+    if request.method == 'POST' and 'register_first_name' in request.form:
+        tab_one=""
+        tab_selected_one="false"
+        tab_show_one=""
+        tab_two="active"
+        tab_selected_two="true"
+        tab_show_two="show"
 
     if request.method == 'POST' and login_form.validate_on_submit():
 

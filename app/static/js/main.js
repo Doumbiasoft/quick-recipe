@@ -418,29 +418,7 @@ $(".delete-account").on("click", async function () {
       }
     });
 });
-// print pdf
+// print recipe
 $("#print-pdf").on("click", function () {
-
-      const $video=$("#video");
-      const $link_feature=$("#link_feature");
-      const $social_media=$("#social_media");
-
-      hide($video);
-      hide($link_feature);
-      hide($social_media);
-      const pdf_name = $(this).data('pdf-name');
-      const divContents = $("#page_print").html();
-      show($video);
-      show($link_feature);
-      show($social_media);
-      const printWindow = window.open('', '', 'height=400,width=800');
-      printWindow.document.write(`<html><head><title>${pdf_name}</title>`);
-      printWindow.document.write(`<link rel="stylesheet" href="${app_bootstrap_css_url}" />`);
-      printWindow.document.write(`<link rel="stylesheet" href="${app_main_css_url}" />`);
-      printWindow.document.write('</head><body>');
-      printWindow.document.write(divContents);
-      printWindow.document.write('</body></html>');
-      printWindow.document.close();
-      printWindow.print();
-
+    window.print();
 });

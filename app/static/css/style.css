@@ -2589,3 +2589,61 @@ ol {
 	font-weight: 700;
 	cursor: pointer;
 }
+
+/* ----------------------- Print Styles ------------------------*/
+@media print {
+    /* Hide everything except the recipe content */
+    #preloder,
+    .header-section-other,
+    .spad-mid,
+    .alert,
+    #back,
+    #link_feature,
+    #social_media,
+    #video,
+    .footer-section,
+    #scrollToTopBtn,
+    #mobile-menu-wrap {
+        display: none !important;
+    }
+
+    /* Remove page margins and shadows */
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Ensure background images print */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Remove unnecessary padding around the recipe */
+    .single-page-recipe {
+        padding: 0 !important;
+    }
+
+    .recipe-top {
+        padding: 10px 0 !important;
+    }
+
+    /* Ensure the recipe image prints */
+    .set-bg {
+        background-size: cover !important;
+        background-position: center !important;
+    }
+
+    /* Keep columns side by side */
+    .col-lg-5, .col-lg-7 {
+        width: 50% !important;
+        float: left !important;
+    }
+
+    /* Avoid page breaks inside recipe sections */
+    .ingredients-item,
+    .recipe-right,
+    .nutrition-fact {
+        page-break-inside: avoid;
+    }
+}

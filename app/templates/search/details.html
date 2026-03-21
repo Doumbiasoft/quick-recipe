@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% block title %} {{recipe.name}} {% endblock %}
 
+{% block meta %}
+<meta property="og:type"        content="website">
+<meta property="og:title"       content="{{recipe.name}} - Quick Recipe">
+<meta property="og:description" content="{{recipe.description or 'Discover this recipe on Quick Recipe.'}}">
+<meta property="og:image"       content="{{recipe.thumbnail_url}}">
+<meta property="og:url"         content="{{request.url}}">
+<meta name="twitter:card"       content="summary_large_image">
+<meta name="twitter:title"      content="{{recipe.name}} - Quick Recipe">
+<meta name="twitter:description"content="{{recipe.description or 'Discover this recipe on Quick Recipe.'}}">
+<meta name="twitter:image"      content="{{recipe.thumbnail_url}}">
+{% endblock %}
+
 {% block content %}
 
      <!-- Single Recipe Section Begin -->

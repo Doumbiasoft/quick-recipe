@@ -70,8 +70,18 @@ def recipes_details(recipe_id):
         json_string = json.dumps(json_object)
         json_object = Json2Object(json_string)
         recipe = Json2Object(json_object)
+        # Verify the session data matches the recipe_id in the URL;
+        # if not (e.g. shared link), fall back to the API.
+        if getattr(recipe, 'id', None) != recipe_id:
+            recipe = None
     else:
-        abort(401)
+        recipe = None
+
+    if recipe is None:
+        data = get_data(f"{API_URL_BASE}/recipes/get-more-info", headers=headers, params={"id": recipe_id})
+        if data is None:
+            abort(404)
+        recipe = data
 
     return render_template('search/details.html',recipe=recipe)
 

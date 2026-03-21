@@ -43,21 +43,23 @@
                             <h2 class="text-center">{{recipe.name}}</h2>
                             <div class="rating">
                             {% if recipe.user_ratings  %}
-                                    {% if recipe.user_ratings.score < 1 or recipe.user_ratings.score == 0    %}
+                                    {% set score = (recipe.user_ratings.score * 5) | round | int %}
+                                    {% if score == 0 %}
                                         <i class="fa fa-star-o"></i>
-                                    {% else  %}
-                                        {%for star in generate_float_range(0, recipe.user_ratings.score) %}
+                                    {% else %}
+                                        {% for star in generate_float_range(0, score) %}
                                         <i class="fa fa-star"></i>
-                                        {% endfor%}
+                                        {% endfor %}
                                     {% endif %}
-                                    {%for star in generate_float_range(1,((5)-(recipe.user_ratings.score))) %}
+                                    {% for star in generate_float_range(0, 5 - score) %}
                                     <i class="fa fa-star-o"></i>
-                                    {% endfor%}
+                                    {% endfor %}
                             {% endif %}
                             </div>
                                 <div class="reviews">
                                     {% if recipe.user_ratings  %}
-                                        {{recipe.user_ratings.score}} from {{recipe.user_ratings.count_negative + recipe.user_ratings.count_positive}} reviews
+                                        {% set score = (recipe.user_ratings.score * 5) | round(1) %}
+                                        {{ score }}/5 from {{recipe.user_ratings.count_negative + recipe.user_ratings.count_positive}} reviews
                                     {% endif %}
                                 </div>
                             <div class="recipe-time">
@@ -85,27 +87,22 @@
                                     <a href="#" data-toggle="modal" data-target="#alertModal" class="black-btn"><i class="fa fa-heart text-white"></i>&nbsp;&nbsp;Pin Recipe</a>
                                 {% endif %}
                             </div>
-                            {% if g.user %}
                             <div id="social_media">
                                 <p>
                                     <i class="fa fa-share-alt fa-1x"></i>&nbsp;&nbsp;<span style="font-weight: 700;">Share with:</span>
-                                    <br>
-                                    {{ share.create(title='', sites='facebook,twitter,linkedin',mobile_sites='facebook,twitter,linkedin') }}
-                                    <br>
                                 </p>
+                                <div class="d-flex" style="gap: 8px;">
+                                    {% if g.user %}
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" target="_blank" rel="noopener" class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                                    {% else %}
+                                    <button type="button" class="btn btn-social-icon btn-facebook" data-toggle="modal" data-target="#alertModal"><i class="fa fa-facebook"></i></button>
+                                    <button type="button" class="btn btn-social-icon btn-twitter" data-toggle="modal" data-target="#alertModal"><i class="fa fa-twitter"></i></button>
+                                    <button type="button" class="btn btn-social-icon btn-linkedin" data-toggle="modal" data-target="#alertModal"><i class="fa fa-linkedin"></i></button>
+                                    {% endif %}
+                                </div>
                             </div>
-                            {% else %}
-                            <div>
-                                <a href="#" data-toggle="modal" data-target="#alertModal">
-                                    <p>
-                                        <i class="fa fa-share-alt fa-1x"></i>&nbsp;&nbsp;<span style="font-weight: 700;">Share with:</span>
-                                        <br>
-                                        {{ share.create(title='', sites='facebook,twitter,linkedin',mobile_sites='facebook,twitter,linkedin') }}
-                                        <br>
-                                    </p>
-                                </a>
-                            </div>
-                            {% endif %}
                             <div class="list-item">
                                 <h5>Ingredients</h5>
                                 {%if recipe.sections  %}

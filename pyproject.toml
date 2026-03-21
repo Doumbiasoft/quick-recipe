@@ -1,0 +1,30 @@
+[project]
+name = "quick-recipe"
+version = "1.0.0"
+requires-python = ">=3.13"
+dependencies = [
+    "bcrypt",
+    "cachecontrol",
+    "cachelib",
+    "cachetools",
+    "Flask",
+    "Flask-Bcrypt",
+    "Flask-DebugToolbar",
+    "Flask-Session",
+    "Flask-SQLAlchemy",
+    "Flask-WTF",
+    "google-auth",
+    "google-auth-oauthlib",
+    "gunicorn",
+    "itsdangerous",
+    "Jinja2",
+    "numpy",
+    "psycopg2-binary",
+    "python-dotenv",
+    "requests",
+    "requests-cache",
+    "requests-oauthlib",
+    "SQLAlchemy",
+    "Werkzeug",
+    "WTForms",
+]

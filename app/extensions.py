@@ -7,7 +7,7 @@ from sqlalchemy.sql import func
 from sqlalchemy.dialects.postgresql import JSONB
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,EmailField,TextAreaField,BooleanField,SelectField
-from wtforms.validators import InputRequired,Length
+from wtforms.validators import InputRequired,Length,EqualTo
 import os
 import requests
 import datetime

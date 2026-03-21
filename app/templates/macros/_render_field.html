@@ -1,10 +1,10 @@
 {% macro render_field_search_form(field) %}
-{{ field(class_= '', **kwargs)}}
- <small>
+{{ field(class_='', **kwargs) }}
+<small>
     {% if field.errors %}
         {% for error in field.errors %}
             <span class="text-danger">{{ error }}</span>
         {% endfor %}
     {% endif %}
- </small>
+</small>
 {% endmacro %}

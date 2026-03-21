@@ -138,13 +138,14 @@ const app_main_css_url = $("#app-main-css-url").data('app-main-css-url');
 $(".recipe-detail").on("click", async function (e) {
     e.preventDefault();
     const recipe_item = $(this).data('obj');
+    const recipe_id = recipe_item.id;
     await axios({
         url: url_post,
         method: "POST",
-        data: recipe_item,
+        data: JSON.stringify(recipe_item),
       }).then(function (response) {
         if(response.data == "success"){
-            window.location = url_callback;
+            window.location = `${url_callback}/${recipe_id}`;
         }
       });
 });

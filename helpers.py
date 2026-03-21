@@ -1,8 +1,9 @@
 import json
-from typing import Final
+import logging
 from requests_cache import CachedSession
 from datetime import timedelta
-import os
+
+logger = logging.getLogger(__name__)
 
 try:
     from types import SimpleNamespace as Namespace
@@ -23,7 +24,7 @@ def convert_json(json_str):
         json_data = json.loads(json_str, strict=False)
         return json_data
     except json.JSONDecodeError as e:
-        print(f"Error decoding JSON: {str(e)}")
+        logger.error(f"Error decoding JSON: {e}")
         return None
 
 def Json2Object(json_text):
@@ -37,14 +38,15 @@ def Object2Json(obj):
     return json.dumps(obj, default=lambda o: o.__dict__, indent=4)
 
 
-def get_data(url:str, headers:dict, params:dict=None):
-    """Call an API and return a JSON object from the given url and headers and params from cache or api."""
-    URL:Final = url
-    response = requests_cache_session.get(URL, headers = headers, params = params)
-    try:
-       data = Json2Object(response.text)
-    except Exception as e:
-        print(f'{response.status_code} - {e}')
+def get_data(url: str, headers: dict, params: dict = None):
+    """Call an API and return a JSON object from the given url, headers and params — served from cache or live."""
+    response = requests_cache_session.get(url, headers=headers, params=params)
+    if not response.ok:
+        logger.error(f"API error {response.status_code} for {url} | params={params}")
         return None
-    return data
+    try:
+        return Json2Object(response.text)
+    except Exception as e:
+        logger.error(f"Failed to parse API response from {url} | params={params} | error: {e}")
+        return None
 

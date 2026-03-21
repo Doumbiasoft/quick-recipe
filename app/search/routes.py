@@ -5,8 +5,14 @@ from app.forms.search.recipes import SearchForm
 
 url = f"{API_URL_BASE}/recipes/list"
 url_tags = f"{API_URL_BASE}/tags/list"
-data_tags = get_data(url_tags,headers=headers)
-tags = data_tags.results
+_tags = None
+
+def _get_tags():
+    global _tags
+    if _tags is None:
+        data = get_data(url_tags, headers=headers)
+        _tags = data.results
+    return _tags
 
 
 @bp.route('/recipes', methods=['GET','POST'])
@@ -32,10 +38,7 @@ def recipes():
 
 
             data_recipes_found = get_data(url,headers=headers,params=querystring)
-            if tag is not None or recipe is not None:
-                recipes_found = data_recipes_found.results
-            elif tag is None and recipe is None:
-                recipes_found = data_recipes_found.results
+            recipes_found = data_recipes_found.results
             return render_template('search/recipes.html',recipes_found=recipes_found,form=form)
 
     data_recipes_found = get_data(url,headers=headers,params=querystring)
@@ -59,15 +62,14 @@ def recipes_item():
 
 
 
-@bp.route('/recipes/details', methods=['GET'])
-def recipes_details():
+@bp.route('/recipes/details/<int:recipe_id>', methods=['GET'])
+def recipes_details(recipe_id):
     """Detail recipe view"""
-    if request.method == 'GET':
-        if RECIPE_ITEM in session:
-            json_object = session.get(RECIPE_ITEM)
-            json_string = json.dumps(json_object)
-            json_object = Json2Object(json_string)
-            recipe = Json2Object(json_object)
+    if RECIPE_ITEM in session:
+        json_object = session.get(RECIPE_ITEM)
+        json_string = json.dumps(json_object)
+        json_object = Json2Object(json_string)
+        recipe = Json2Object(json_object)
     else:
         abort(401)
 
@@ -75,39 +77,11 @@ def recipes_details():
 
 
 
-def get_type():
-    seen = set()
-    unique_list = []
-    for obj in tags:
-        if obj.type not in seen:
-            unique_list.append({"id":f"{obj.type}","name":f"{obj.type.replace('_',' ')}"})
-            seen.add(obj.type)
-    return unique_list
-
-def get_tag_by_type(type:str):
-    seen = set()
-    unique_list = []
-    for obj in tags:
-        if obj.type == type:
-            if obj.name not in seen:
-               unique_list.append({"id":f"{obj.name}","name":f"{obj.display_name.lower()}"})
-               seen.add(obj.name)
-    return unique_list
-
-def get_tag():
-    seen = set()
-    unique_list = []
-    for obj in tags:
-        if obj.name not in seen:
-            unique_list.append({"id":f"{obj.name}","name":f"{obj.display_name.lower()}"})
-            seen.add(obj.name)
-    return unique_list
-
 def get_tag_tuple():
     seen = set()
     unique_list = []
     unique_list.append(("","-- Tags --"))
-    for obj in tags:
+    for obj in _get_tags():
         if obj.name not in seen:
             unique_list.append((f"{obj.name}",f"{obj.display_name.lower()}"))
             seen.add(obj.name)

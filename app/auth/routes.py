@@ -21,6 +21,20 @@ flow = Flow.from_client_config(
 
 serializer = URLSafeTimedSerializer(os.getenv('URL_SAFE_KEY',None))
 
+def get_oauth_names(id_info):
+    """Google only guarantees the 'name' claim; given_name/family_name are
+    omitted for accounts with no separate first/last name (e.g. business
+    accounts like "CorvaHub"). Fall back to splitting 'name' so first_name
+    and last_name are never None for the not-null users columns."""
+    first_name = id_info.get("given_name")
+    last_name = id_info.get("family_name")
+    if not first_name or not last_name:
+        full_name = (id_info.get("name") or "").strip()
+        name_first, _, name_last = full_name.partition(" ")
+        first_name = first_name or name_first
+        last_name = last_name or name_last
+    return first_name, last_name
+
 
 @bp.route('/google-login')
 def google_login():
@@ -50,8 +64,7 @@ def google_login_callback():
     user = User.get_users().filter(User.oauth_uid == id_info.get("sub"), User.is_active == True, User.is_oauth == True).first()
     if user:
 
-        user.first_name = id_info.get("given_name")
-        user.last_name = id_info.get("family_name")
+        user.first_name, user.last_name = get_oauth_names(id_info)
         user.email = id_info.get("email")
         user.oauth_provider = "Google"
         user.oauth_uid = id_info.get("sub")
@@ -68,8 +81,7 @@ def google_login_callback():
             flash('This email address already exists!','warning')
             return redirect(url_for('auth.authentication'))
 
-        first_name = id_info.get("given_name")
-        last_name = id_info.get("family_name")
+        first_name, last_name = get_oauth_names(id_info)
         email = id_info.get("email")
         oauth_provider = "Google"
         oauth_uid = id_info.get("sub")
